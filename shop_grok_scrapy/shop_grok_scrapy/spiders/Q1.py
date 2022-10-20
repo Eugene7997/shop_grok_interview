@@ -14,6 +14,7 @@ class AidiSpider(CrawlSpider):
     def parse_item(self, response):
         yield {
             'product_title': "".join(a.strip() for a in response.css("h1.detail-box--price-box--title *::text").extract()),
+            'product_image': response.css("img.detail-box--image.m-first::attr(src)").extract(), 
             'price': response.css('span.box--value::text').get()+response.css('span.box--decimal::text').get(),
             'pack_size': response.css('span.detail-box--price-box--price--amount.box--amount ::text').get(),
             'price_per_unit': response.css('span.detail-box--price-box--price--detailamount.box--detailamount::text').get(),
